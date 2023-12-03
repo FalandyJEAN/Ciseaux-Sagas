@@ -13,9 +13,10 @@ function getComputerChoice(){
     return computerSelection
 }
 
-function getPlayerChoice(){
-    convertCase = (selection) => selection.charAt(0).toUpperCase() + selection.slice(1).toLowerCase()
+convertCase = (selection) => selection.charAt(0).toUpperCase() + selection.slice(1).toLowerCase()
 
+
+function getPlayerChoice(){
     playerSelection = convertCase(readline.question("Que choissisez vous? :"))
 
     while (!list.includes(playerSelection)){
@@ -30,16 +31,18 @@ function playRound(computerSelection, playerSelection) {
     console.log(`Joueur : ${playerSelection}`)
 
     if (computerSelection === playerSelection) {
-        console.log("Match nul.")
+        console.log(`${computerSelection} est egale a ${playerSelection}\nMatch nul.`)
+        computerScore++
+        playerScore++
     } else if (
         (computerSelection === "Ciseaux" && playerSelection === "Papier") ||
         (computerSelection === "Papier" && playerSelection === "Roche") ||
         (computerSelection === "Roche" && playerSelection === "Ciseaux")
     ) {
-        console.log("Vous avez perdu !")
+        console.log(`${computerSelection} bat ${playerSelection}\nVous avez perdu !`)
         computerScore++
     } else {
-        console.log("Vous avez gagné !")
+        console.log(`${playerSelection} bat ${computerSelection}\nVous avez gagné !`)
         playerScore++
     }
 
