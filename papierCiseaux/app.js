@@ -1,7 +1,6 @@
 const readline = require('readline-sync')
 
 let computerSelection,playerSelection,convertCase
-let roundTotal = 5
 let computerScore = 0
 let playerScore = 0
 
@@ -53,25 +52,33 @@ function playRound(computerSelection, playerSelection) {
 
 
 function game(){
-    console.log(`******Jeu Roche - Papier - Ciseaux******`)
+    let round = 1;
 
-    for(let round = 1;round <= roundTotal;round++){
-        console.log(`***Round :${round}***`)
+    do {
+        console.log(`******Jeu Roche - Papier - Ciseaux******`)
+        console.log(`***Round : ${round}***`)
 
         computerSelection = getComputerChoice()
         playerSelection = getPlayerChoice()
 
-        playRound(computerSelection,playerSelection)
-    }
+        playRound(computerSelection, playerSelection)
 
-    // kiyes ki genyen
-    if (playerScore > computerScore) {
-        console.log("Vous avez gagné le jeu !")
-    } else if (playerScore < computerScore) {
-        console.log("L'ordinateur a gagné le jeu !")
-    } else {
-        console.log("Le jeu est un match nul !")
-    }
+        if (playerScore > computerScore) {
+            console.log("Vous avez gagné le jeu !")
+        } else if (playerScore < computerScore) {
+            console.log("L'ordinateur a gagné le jeu !")
+        } else {
+            console.log("Le jeu est un match nul !")
+        }
+
+        if (playerScore === 5 || computerScore === 5) {
+            break
+        }
+
+        round++
+
+    } while (true)
+
 }
 
 
