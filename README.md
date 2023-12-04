@@ -1,32 +1,33 @@
-# Ciseaux Saga
+Ciseaux Saga - Guide de l'Utilisateur
+Page d'accueil
 
-![Acceuil](IMAGES/ciseauxSagas.png)
+Bienvenue dans Ciseaux Saga, le jeu de roche-papier-ciseaux passionnant et facile à jouer.
 
-Bienvenue dans Ciseaux Saga, un jeu de roche-papier-ciseaux passionnant et facile à jouer.
-
-## Présentation
-
+Aperçu
 Ciseaux Saga offre une expérience ludique du célèbre jeu de roche-papier-ciseaux. Affrontez l'ordinateur, choisissez votre arme avec soin et remportez des victoires épiques pour devenir le maître de Ciseaux Saga.
 
-![Capture d'écran du jeu en action](IMAGES/jeu.png)
+Capture d'écran du jeu en action
 
-## Comment jouer
+Comment jouer
+Démarrer le jeu : Cliquez sur le bouton "Démarrer le jeu" pour lancer l'aventure.
 
-1. **Démarrer le jeu :** Cliquez sur le bouton "Démarrer le jeu" pour lancer l'aventure.
+Choisir votre arme : Sélectionnez votre arme préférée parmi les options de roche, papier ou ciseaux.
 
-2. **Choisir votre arme :** Sélectionnez votre arme préférée parmi les options de roche, papier ou ciseaux.
+Affronter l'ordinateur : L'ordinateur fera son choix, et le résultat sera annoncé avec des effets sonores excitants.
 
-3. **Affrontez l'ordinateur :** L'ordinateur fera son choix, et le résultat sera annoncé avec des effets sonores excitants.
+Gagner des points : Accumulez des points en battant l'ordinateur avec des combinaisons stratégiques.
 
-4. **Gagner des points :** Accumulez des points en battant l'ordinateur avec des combinaisons stratégiques.
+Gagner la partie : Soyez le premier à atteindre 5 points pour remporter la partie.
 
-5. **Gagner la partie :** Soyez le premier à atteindre 5 points pour remporter la partie.
+Exécution en local
+Pour exécuter le jeu en local, assurez-vous d'avoir les technologies suivantes installées :
 
-## Exécution locale
-
-##Technologies utilisées
 HTML
 CSS
 JavaScript
-##Auteur
+Technologies utilisées
+HTML
+CSS
+JavaScript
+Auteur
 Falandy Jean
