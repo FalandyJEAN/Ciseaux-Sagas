@@ -10,7 +10,7 @@ body{
     justify-content: center;
     margin: 0;
     height: 100vh;
-    background-image: url("/ciseauxSagas/IMAGES/briquejpeg.jpeg");
+    background-image: url("IMAGES/briquejpeg.jpeg");
     background-size: cover;
 }
 
