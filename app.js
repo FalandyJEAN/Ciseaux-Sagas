@@ -85,17 +85,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function playRound(computerSelection, playerSelection) {
         if (computerSelection === playerSelection) {
-            showResult(`${computerSelection} est egale a ${playerSelection}\nMatch nul !`)
+            showResult(`${computerSelection} est egale a ${playerSelection} Match nul !`)
         } else if (
             (computerSelection === "ciseaux" && playerSelection === "papier") ||
             (computerSelection === "papier" && playerSelection === "roche") ||
             (computerSelection === "roche" && playerSelection === "ciseaux")
         ) {
             computerScore++;
-            showResult(`${computerSelection} bat ${playerSelection}\nVous avez perdu ce tour !`)
+            showResult(`${computerSelection} bat ${playerSelection} Vous avez perdu ce tour !`)
         } else {
             playerScore++
-            showResult(`${playerSelection} bat ${computerSelection}\nVous avez gagne ce tour !`)
+            showResult(`${playerSelection} bat ${computerSelection} Vous avez gagne ce tour !`)
         }
 
         computerScoreDisplay.innerText = computerScore
