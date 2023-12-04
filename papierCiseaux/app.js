@@ -1,16 +1,15 @@
 let playerInput = document.querySelectorAll(".choix")
-let son = document.getElementById("son")
+let playerSon = document.getElementById("son1")
+let computerSon = document.getElementById("son2")
+let startSon = document.getElementById("son3")
 let computerChooseRoche = document.getElementById("roche")
 let computerChooseCiseaux = document.getElementById("ciseaux")
 let computerChoosePapier = document.getElementById("papier")
-let computerSelection,playerSelection,convertCase
-const list = ["Roche","Papier","Ciseaux"]
+let resultat = document.getElementById("resultat")
+let computerSelection,playerSelection
+const list = ["roche","papier","ciseaux"]
 let computerScore = 0
 let playerScore = 0
-
-function playSound(){
-    son.play()
-}
 
 function getPlayerChoice(){
     playerInput.forEach(function(link){
@@ -21,25 +20,38 @@ function getPlayerChoice(){
             })
     
             link.style.border = "4px solid green"
-            playerSelection = this.getAttribute("data-text")
-            playSound()
+            playerSelection = this.getAttribute("alt")
+            playSound1()
+
+            setTimeout(function () {
+                const computerSelection = getComputerChoice()
+                updateComputerChoiceBorder(computerSelection, playerSelection)
+                playSound2()
+            }, 500)
+
         })
     })
     return playerSelection
 }
 
-function getComputerChoice(){
-    computerSelection = list[Math.floor(Math.random() * list.length)]
-    if(computerSelection === computerChooseRoche){
-        computerChooseRoche.style.border = "4px solid green"
-    }else if(computerSelection === computerChooseCiseaux){
-        computerChooseCiseaux.style.border = "4px solid green"
-    }else if(computerSelection === computerChoosePapier){
-        computerChoosePapier.style.border = "4px solid green"
-    }
-
-    return computerSelection
+function getComputerChoice() {
+    return list[Math.floor(Math.random() * list.length)]
 }
+
+function updateComputerChoiceBorder(computerSelection, playerSelection) {
+    if (playerSelection) {
+        const computerImages = document.querySelectorAll(".computerSelection .img img")
+        computerImages.forEach(function (image) {
+            image.style.border = "none"
+        })
+
+        const computerChoiceImage = document.querySelector(`.computerSelection .img img[alt="${computerSelection}"]`)
+        if (computerChoiceImage) {
+            computerChoiceImage.style.border = "4px solid red"
+        }
+    }
+}
+
 
 function playRound(computerSelection, playerSelection) {
     console.log(`\nOrdinateur : ${computerSelection}`)
@@ -64,14 +76,22 @@ function playRound(computerSelection, playerSelection) {
     return [computerSelection, playerSelection]
 }
 
+function playSound1(){
+    playerSon.play()
+}
 
-function game(){
-    let round = 1;
+function playSound2(){
+    computerSon.play()
+}
+
+function playSound3(){
+    startSon.play()
+}
+
+function game() {
+    let round = 1
 
     do {
-        console.log(`******Jeu Roche - Papier - Ciseaux******`)
-        console.log(`***Round : ${round}***`)
-
         computerSelection = getComputerChoice()
         playerSelection = getPlayerChoice()
 
@@ -93,16 +113,9 @@ function game(){
 
     } while (true)
 
-}
-
-
-game()
-
-
-function demarrerJeu() {
     document.getElementById("bouton").style.display = "none"
     document.getElementById("boutonCSS").disabled = true
     
     document.getElementById("jeu").style.display = "block"
-    playSound()
+    playSound3()
 }

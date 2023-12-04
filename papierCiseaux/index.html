@@ -7,11 +7,19 @@
         <link rel="stylesheet" href="CSS/bouton.css" id="boutonCSS">
         <script src="app.js" defer></script>
         <script src="https://kit.fontawesome.com/16d512547d.js" crossorigin="anonymous"></script>
-        <title>Roches Ciseaux Papier</title>
+
+        <link rel="apple-touch-icon" sizes="120x120" href="IMAGES/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="IMAGES/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="IMAGES/favicon-16x16.png">
+        <link rel="manifest" href="IMAGES/site.webmanifest">
+        <link rel="mask-icon" href="IMAGES/safari-pinned-tab.svg" color="#ff0000">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        <title>Ciseaux Saga</title>
 
     </head>
     <body>
-        <button type="button" onclick="demarrerJeu()" id="bouton" style="display: block;">Démarrer Le jeu</button>
+        <button type="button" onclick="game()" id="bouton" style="display: block;">Démarrer Le jeu</button>
 
         <section id="jeu" style="display: none;">
             <div class="entete">
@@ -20,7 +28,7 @@
             
             <div class="container">
                 <h1>Choisis ton arme</h1>
-                <p>Le premier joueur a avoir comptabilise 5 points gagne.</p>
+                <p>Le premier joueur à avoir comptabilisé 5 points gagne.</p>
     
                 <div class="arme">
                     <div class="playerSelection">
@@ -31,9 +39,9 @@
                             </h2>
                         </div>
                         <div class="img">
-                            <img src="IMAGES/roches.jpeg" alt="roche" class="choix" data-text="roche">
-                            <img src="IMAGES/ciseaux.jpeg" alt="ciseaux" class="choix" data-text="ciseaux">
-                            <img src="IMAGES/papier.jpeg" alt="papier" class="choix" data-text="papier">
+                            <img src="IMAGES/roches.jpeg" alt="roche" class="choix">
+                            <img src="IMAGES/ciseaux.jpeg" alt="ciseaux" class="choix">
+                            <img src="IMAGES/papier.jpeg" alt="papier" class="choix">
                         </div>
                     </div>
     
@@ -52,8 +60,17 @@
                     </div>
                 </div>
             </div>
-            <audio src="SONS/zapsplat_multimedia_button_click_005_53866.mp3" id="son"></audio>
+
+            <audio src="SONS/playerSound.mp3" id="son1"></audio>
+            <audio src="SONS/computerSound.wav" id="son2"></audio>
+            <audio src="SONS/startSound.wav" id="son3"></audio>
+
             <footer>copyright&copy;<a href="">2023 Falandy Jean</a></footer>
+        </section>
+
+        <section class="resultat" style="display: none;">
+            <!--Resultat apres un score de 5-->
+            <button type="button" id="bouton2">Rejouer</button>
         </section>
         
     </body>

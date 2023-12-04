@@ -10,7 +10,8 @@ body{
     justify-content: center;
     margin: 0;
     height: 100vh;
-    background-color: white;
+    background-image: url(/IMAGES/background.jpg);
+    background-size: cover;
 }
 
 button{

@@ -82,6 +82,10 @@ footer{
     font-family: 'Courier New', Courier, monospace;
 }
 
+#resultat{
+    background-color: white;
+    color: rgb(12, 81, 81);
+}
 footer a{
     text-decoration: none;
     color: rgb(240, 202, 153);
