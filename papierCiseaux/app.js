@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 
     function startGame() {
+        playSound3()
         boutonDemarrer.style.display = "none"
         jeuSection.style.display = "block"
         getPlayerChoice()
@@ -50,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 //remove notabene
                 setTimeout(function(){
                     notaBene.innerText = " "
-                },200)
+                },100)
 
                 setTimeout(function () {
                     computerSelection = getComputerChoice()
@@ -84,17 +85,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function playRound(computerSelection, playerSelection) {
         if (computerSelection === playerSelection) {
-            showResult("Match nul !")
+            showResult(`${computerSelection} est egale a ${playerSelection}\nMatch nul !`)
         } else if (
             (computerSelection === "ciseaux" && playerSelection === "papier") ||
             (computerSelection === "papier" && playerSelection === "roche") ||
             (computerSelection === "roche" && playerSelection === "ciseaux")
         ) {
             computerScore++;
-            showResult("Vous avez perdu ce tour !")
+            showResult(`${computerSelection} bat ${playerSelection}\nVous avez perdu ce tour !`)
         } else {
             playerScore++
-            showResult("Vous avez gagne ce tour !")
+            showResult(`${playerSelection} bat ${computerSelection}\nVous avez gagne ce tour !`)
         }
 
         computerScoreDisplay.innerText = computerScore
@@ -114,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function showResult(result) {
         ecran.innerText = result
-        ecran.style.color = "rgb(12, 81, 81)"
+        ecran.style.color = "white"
         ecran.style.paddingTop = "15px"
     }
 

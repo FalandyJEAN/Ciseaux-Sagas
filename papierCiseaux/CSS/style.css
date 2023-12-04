@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body{
+    background-color: rgb(72, 96, 86);
+}
+
 .entete{
     background-color: rgb(12, 81, 81);
     color: rgb(240, 202, 153);
@@ -79,7 +83,7 @@ footer{
 }
 
 .resultat{
-    color: rgb(12, 81, 81);
+    color:white;
 }
 
 .resultat h4{
