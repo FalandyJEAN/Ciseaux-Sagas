@@ -1,121 +1,157 @@
-let playerInput = document.querySelectorAll(".choix")
-let playerSon = document.getElementById("son1")
-let computerSon = document.getElementById("son2")
-let startSon = document.getElementById("son3")
-let computerChooseRoche = document.getElementById("roche")
-let computerChooseCiseaux = document.getElementById("ciseaux")
-let computerChoosePapier = document.getElementById("papier")
-let resultat = document.getElementById("resultat")
-let computerSelection,playerSelection
-const list = ["roche","papier","ciseaux"]
-let computerScore = 0
-let playerScore = 0
+document.addEventListener("DOMContentLoaded", function () {
+    const playerInput = document.querySelectorAll(".choix")
+    const playerSon = document.getElementById("son1")
+    const computerSon = document.getElementById("son2")
+    const startSon = document.getElementById("son3")
+    const winnerSon = document.getElementById("son4")
+    const loseSon = document.getElementById("son5")
+    const boutonDemarrer = document.getElementById("bouton")
+    const jeuSection = document.getElementById("jeu")
+    const resultatSection = document.querySelector(".resultat")
+    const computerScoreDisplay = document.getElementById("computerScore")
+    const playerScoreDisplay = document.getElementById("playerScore")
+    const ecran = document.getElementById("ecran")
+    const boutonRejouer = document.getElementById("bouton2")
+    const notaBene = document.getElementById("notaBene")
 
-function getPlayerChoice(){
-    playerInput.forEach(function(link){
-        link.addEventListener("click",function(event){
-            event.preventDefault()
-            playerInput.forEach(function(otherLink){
-                otherLink.style.border = "initial"
-            })
-    
-            link.style.border = "4px solid green"
-            playerSelection = this.getAttribute("alt")
-            playSound1()
+    let computerSelection, playerSelection,computerImages,playerScore = 0, computerScore = 0
+    const list = ["roche", "papier", "ciseaux"]
 
-            setTimeout(function () {
-                const computerSelection = getComputerChoice()
-                updateComputerChoiceBorder(computerSelection, playerSelection)
-                playSound2()
-            }, 500)
+    boutonDemarrer.addEventListener("click", startGame)
 
-        })
+    boutonRejouer.addEventListener("click", function () {
+        playerScore = 0
+        computerScore = 0
+        computerScoreDisplay.innerText = "0"
+        playerScoreDisplay.innerText = "0"
+        resultatSection.style.display = "none"
+
+        jeuSection.style.display = "block"
     })
-    return playerSelection
-}
 
-function getComputerChoice() {
-    return list[Math.floor(Math.random() * list.length)]
-}
+    function startGame() {
+        boutonDemarrer.style.display = "none"
+        jeuSection.style.display = "block"
+        getPlayerChoice()
+    }
 
-function updateComputerChoiceBorder(computerSelection, playerSelection) {
-    if (playerSelection) {
-        const computerImages = document.querySelectorAll(".computerSelection .img img")
-        computerImages.forEach(function (image) {
-            image.style.border = "none"
+    function getPlayerChoice() {
+        playerInput.forEach(function (link) {
+            link.addEventListener("click", function (event) {
+                event.preventDefault()
+                playerInput.forEach(function (otherLink) {
+                    otherLink.style.border = "initial"
+                })
+
+                link.style.border = "4px solid green"
+                playerSelection = this.getAttribute("alt")
+                playSound1()
+
+                //remove notabene
+                setTimeout(function(){
+                    notaBene.innerText = " "
+                },200)
+
+                setTimeout(function () {
+                    computerSelection = getComputerChoice()
+                    updateComputerChoiceBorder(computerSelection, playerSelection)
+                    playSound2()
+                    playRound(computerSelection, playerSelection)
+                }, 500)
+            })
         })
+    }
 
-        const computerChoiceImage = document.querySelector(`.computerSelection .img img[alt="${computerSelection}"]`)
-        if (computerChoiceImage) {
-            computerChoiceImage.style.border = "4px solid red"
+    function getComputerChoice() {
+        return list[Math.floor(Math.random() * list.length)]
+    }
+
+    function updateComputerChoiceBorder(computerSelection, playerSelection) {
+        if (playerSelection) {
+            computerImages = document.querySelectorAll(".computerSelection .img img")
+            computerImages.forEach(function (image) {
+                image.style.border = "none"
+            })
+
+            const computerChoiceImage = document.querySelector(
+                `.computerSelection .img img[alt="${computerSelection}"]`
+            )
+            if (computerChoiceImage) {
+                computerChoiceImage.style.border = "4px solid yellow"
+            }
         }
     }
-}
 
-
-function playRound(computerSelection, playerSelection) {
-    console.log(`\nOrdinateur : ${computerSelection}`)
-    console.log(`Joueur : ${playerSelection}`)
-
-    if (computerSelection === playerSelection) {
-        console.log(`${computerSelection} est egale a ${playerSelection}\nMatch nul.`)
-    } else if (
-        (computerSelection === "Ciseaux" && playerSelection === "Papier") ||
-        (computerSelection === "Papier" && playerSelection === "Roche") ||
-        (computerSelection === "Roche" && playerSelection === "Ciseaux")
-    ) {
-        console.log(`${computerSelection} bat ${playerSelection}\nVous avez perdu !`)
-        computerScore++
-    } else {
-        console.log(`${playerSelection} bat ${computerSelection}\nVous avez gagné !`)
-        playerScore++
-    }
-
-    console.log(`Scores :\nJoueur: ${playerScore}, Ordinateur: ${computerScore}\n`)
-
-    return [computerSelection, playerSelection]
-}
-
-function playSound1(){
-    playerSon.play()
-}
-
-function playSound2(){
-    computerSon.play()
-}
-
-function playSound3(){
-    startSon.play()
-}
-
-function game() {
-    let round = 1
-
-    do {
-        computerSelection = getComputerChoice()
-        playerSelection = getPlayerChoice()
-
-        playRound(computerSelection, playerSelection)
-
-        if (playerScore > computerScore) {
-            console.log("Vous avez gagné le jeu !")
-        } else if (playerScore < computerScore) {
-            console.log("L'ordinateur a gagné le jeu !")
+    function playRound(computerSelection, playerSelection) {
+        if (computerSelection === playerSelection) {
+            showResult("Match nul !")
+        } else if (
+            (computerSelection === "ciseaux" && playerSelection === "papier") ||
+            (computerSelection === "papier" && playerSelection === "roche") ||
+            (computerSelection === "roche" && playerSelection === "ciseaux")
+        ) {
+            computerScore++;
+            showResult("Vous avez perdu ce tour !")
         } else {
-            console.log("Le jeu est un match nul !")
+            playerScore++
+            showResult("Vous avez gagne ce tour !")
         }
+
+        computerScoreDisplay.innerText = computerScore
+        playerScoreDisplay.innerText = playerScore
 
         if (playerScore === 5 || computerScore === 5) {
-            break
+            endGame()
+            showResult("")
+            playerInput.forEach(function (otherLink) {
+                otherLink.style.border = "initial"
+            })
+            computerImages.forEach(function (image) {
+                image.style.border = "initial"
+            })
         }
+    }
 
-        round++
+    function showResult(result) {
+        ecran.innerText = result
+        ecran.style.color = "rgb(12, 81, 81)"
+        ecran.style.paddingTop = "15px"
+    }
 
-    } while (true)
+    function endGame() {
+        jeuSection.style.display = "none"
+        resultatSection.style.display = "block"
+        playSound3()
+        
+        resultatSection.lastChild.innerHTML = " "
+        const resultElement = document.createElement("h4")
+        if (playerScore > computerScore){
+            resultElement.innerText = "Vous avez gagné!🏆"
+            playSound4()
+        }else{
+            resultElement.innerText = "Vous avez perdu!🥺"
+            playSound5()
+        }
+        resultatSection.appendChild(resultElement)
+    }
 
-    document.getElementById("bouton").style.display = "none"
-    document.getElementById("boutonCSS").disabled = true
-    
-    document.getElementById("jeu").style.display = "block"
-    playSound3()
-}
+    function playSound1() {
+        playerSon.play()
+    }
+
+    function playSound2() {
+        computerSon.play()
+    }
+
+    function playSound3() {
+        startSon.play()
+    }
+
+    function playSound4() {
+        winnerSon.play()
+    }
+
+    function playSound5() {
+        loseSon.play()
+    }
+})

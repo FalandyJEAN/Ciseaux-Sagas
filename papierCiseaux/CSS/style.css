@@ -4,10 +4,6 @@
     box-sizing: border-box;
 }
 
-body{
-    background-color: rgb(72, 96, 86);
-}
-
 .entete{
     background-color: rgb(12, 81, 81);
     color: rgb(240, 202, 153);
@@ -35,7 +31,7 @@ body{
     padding: 20px 0;
 }
 
-.score{
+.scoreBox{
     color:rgb(240, 202, 153);
 }
 
@@ -43,7 +39,7 @@ body{
 .arme {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 70px;
+    margin-top: 50px;
     gap: 30px;
 }
 
@@ -77,15 +73,22 @@ footer{
     right: 0;
     font-size: larger;
     font-weight: bold;
-    padding: 30px 0;
+    padding: 20px 0;
     color:rgb(240, 202, 153);
     font-family: 'Courier New', Courier, monospace;
 }
 
-#resultat{
-    background-color: white;
+.resultat{
     color: rgb(12, 81, 81);
 }
+
+.resultat h4{
+    font-weight: bolder;
+    font-size: medium;
+    font-family:'Courier New', Courier, monospace;
+    padding-top: auto;
+}
+
 footer a{
     text-decoration: none;
     color: rgb(240, 202, 153);
