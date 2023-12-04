@@ -1,28 +1,44 @@
-const readline = require('readline-sync')
-
+let playerInput = document.querySelectorAll(".choix")
+let son = document.getElementById("son")
+let computerChooseRoche = document.getElementById("roche")
+let computerChooseCiseaux = document.getElementById("ciseaux")
+let computerChoosePapier = document.getElementById("papier")
 let computerSelection,playerSelection,convertCase
+const list = ["Roche","Papier","Ciseaux"]
 let computerScore = 0
 let playerScore = 0
 
-const list = ["Roche","Papier","Ciseaux"]
+function playSound(){
+    son.play()
+}
+
+function getPlayerChoice(){
+    playerInput.forEach(function(link){
+        link.addEventListener("click",function(event){
+            event.preventDefault()
+            playerInput.forEach(function(otherLink){
+                otherLink.style.border = "initial"
+            })
+    
+            link.style.border = "4px solid green"
+            playerSelection = this.getAttribute("data-text")
+            playSound()
+        })
+    })
+    return playerSelection
+}
 
 function getComputerChoice(){
     computerSelection = list[Math.floor(Math.random() * list.length)]
-
-    return computerSelection
-}
-
-convertCase = (selection) => selection.charAt(0).toUpperCase() + selection.slice(1).toLowerCase()
-
-
-function getPlayerChoice(){
-    playerSelection = convertCase(readline.question("Que choissisez vous? :"))
-
-    while (!list.includes(playerSelection)){
-        playerSelection = convertCase(readline.question("Choix invalide ! :"))
+    if(computerSelection === computerChooseRoche){
+        computerChooseRoche.style.border = "4px solid green"
+    }else if(computerSelection === computerChooseCiseaux){
+        computerChooseCiseaux.style.border = "4px solid green"
+    }else if(computerSelection === computerChoosePapier){
+        computerChoosePapier.style.border = "4px solid green"
     }
 
-    return playerSelection
+    return computerSelection
 }
 
 function playRound(computerSelection, playerSelection) {
@@ -31,8 +47,6 @@ function playRound(computerSelection, playerSelection) {
 
     if (computerSelection === playerSelection) {
         console.log(`${computerSelection} est egale a ${playerSelection}\nMatch nul.`)
-        computerScore++
-        playerScore++
     } else if (
         (computerSelection === "Ciseaux" && playerSelection === "Papier") ||
         (computerSelection === "Papier" && playerSelection === "Roche") ||
@@ -83,3 +97,12 @@ function game(){
 
 
 game()
+
+
+function demarrerJeu() {
+    document.getElementById("bouton").style.display = "none"
+    document.getElementById("boutonCSS").disabled = true
+    
+    document.getElementById("jeu").style.display = "block"
+    playSound()
+}
