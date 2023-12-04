@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="CSS/style.css">
+        <link rel="stylesheet" href="CSS/bouton.css" id="boutonCSS">
+        <script src="app.js" defer></script>
+        <script src="https://kit.fontawesome.com/16d512547d.js" crossorigin="anonymous"></script>
+
+        <link rel="apple-touch-icon" sizes="120x120" href="IMAGES/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="IMAGES/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="IMAGES/favicon-16x16.png">
+        <link rel="manifest" href="IMAGES/site.webmanifest">
+        <link rel="mask-icon" href="IMAGES/safari-pinned-tab.svg" color="#ff0000">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        <title>Ciseaux Saga</title>
+
+    </head>
+    <body>
+        <button type="button" onclick="getPlayerChoice()" id="bouton" style="display: block;">Démarrer Le jeu</button>
+
+        <section id="jeu" style="display: none;">
+            <div class="entete">
+                <h1>ROCHE CISEAUX PAPIER</h1>
+            </div>
+            
+            <div class="container">
+                <h1>Choisis ton arme</h1>
+                <p id="notaBene">Le premier joueur à avoir comptabilisé 5 points gagne.</p>
+
+                <div id="ecran">
+                    <!--pour afficher le gagnant de chaque tour-->
+                </div>
+    
+                <div class="arme">
+                    <div class="computerSelection">
+                        <i class="fa-solid fa-computer fa-2xl"></i>
+                        <div class="scoreBox">
+                            <h2>
+                                Ordinnateur : <span id="computerScore">0</span>
+                            </h2>
+                        </div>
+                        <div class="img">
+                            <img src="IMAGES/roches.jpeg" alt="roche">
+                            <img src="IMAGES/ciseaux.jpeg" alt="ciseaux">
+                            <img src="IMAGES/papier.jpeg" alt="papier">
+                        </div>
+                    </div>
+                    <div class="playerSelection">
+                        <i class="fa-solid fa-user fa-2xl"></i>
+                        <div class="scoreBox">
+                            <h2>
+                                Vous : <span id="playerScore">0</span>
+                            </h2>
+                        </div>
+                        <div class="img">
+                            <img src="IMAGES/roches.jpeg" alt="roche" class="choix">
+                            <img src="IMAGES/ciseaux.jpeg" alt="ciseaux" class="choix">
+                            <img src="IMAGES/papier.jpeg" alt="papier" class="choix">
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+
+            <audio src="SONS/playerSound.mp3" id="son1"></audio>
+            <audio src="SONS/computerSound.wav" id="son2"></audio>
+            <audio src="SONS/startSound.wav" id="son3"></audio>
+            <audio src="SONS/winner.wav" id="son4"></audio>
+            <audio src="SONS/Sad-SoundBible.com-759843766.wav" id="son5"></audio>
+
+            <footer>copyright&copy;2023&nbsp;<a href="">Falandy Jean</a></footer>
+        </section>
+
+        <section class="resultat" style="display: none;">
+            <!--Resultat apres un score de 5-->
+            <button type="button" id="bouton2">Rejouer</button>
+        </section>
+        
+    </body>
+</html>

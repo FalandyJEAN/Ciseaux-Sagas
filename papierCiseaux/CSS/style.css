@@ -1,0 +1,138 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(72, 96, 86);
+}
+
+.entete{
+    background-color: rgb(12, 81, 81);
+    color: rgb(240, 202, 153);
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    font-size: x-large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+}
+
+.container{
+    color: white;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.container h1{
+    padding: 20px 0;
+}
+
+.scoreBox{
+    color:rgb(240, 202, 153);
+}
+
+
+.arme {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    gap: 30px;
+}
+
+.playerSelection,.computerSelection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    background-color: rgb(12, 81, 81);
+    padding: 50px 20px 20px 20px;
+    border-radius: 5px;
+}
+
+.arme img{
+    width: 120px;
+    height: 120px;
+    border-radius: 5px;
+}
+
+.img a{
+    text-decoration: none;
+}
+
+footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: larger;
+    font-weight: bold;
+    padding: 20px 0;
+    color:rgb(240, 202, 153);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.resultat{
+    color:white;
+}
+
+.resultat h4{
+    font-weight: bolder;
+    font-size: medium;
+    font-family:'Courier New', Courier, monospace;
+    padding-top: auto;
+}
+
+footer a{
+    text-decoration: none;
+    color: rgb(240, 202, 153);
+}
+
+
+@media screen and (max-width: 650px) {
+    .entete{
+        font-weight: bold;
+        font-size: small;
+        padding: 20px;
+    }
+
+    .container{
+        margin: 5px;
+    }
+
+    .container h1{
+        padding: 10px 0;
+    }
+
+    .arme{
+        margin-top: 10px;
+        display:grid;
+    }
+
+    .arme img{
+        width: 90px;
+        height: 90px;
+        border-radius: 5px;
+    }
+
+    .playerSelection,.computerSelection{
+        gap:20px;
+        padding: 30px 10px 10px 10px;
+    }
+
+    footer{
+        margin-top: 30px;
+        padding: 20px 0;
+        background-color: rgb(12, 81, 81);
+    }
+}

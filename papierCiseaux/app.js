@@ -1,78 +1,158 @@
-const readline = require('readline-sync')
+document.addEventListener("DOMContentLoaded", function () {
+    const playerInput = document.querySelectorAll(".choix")
+    const playerSon = document.getElementById("son1")
+    const computerSon = document.getElementById("son2")
+    const startSon = document.getElementById("son3")
+    const winnerSon = document.getElementById("son4")
+    const loseSon = document.getElementById("son5")
+    const boutonDemarrer = document.getElementById("bouton")
+    const jeuSection = document.getElementById("jeu")
+    const resultatSection = document.querySelector(".resultat")
+    const computerScoreDisplay = document.getElementById("computerScore")
+    const playerScoreDisplay = document.getElementById("playerScore")
+    const ecran = document.getElementById("ecran")
+    const boutonRejouer = document.getElementById("bouton2")
+    const notaBene = document.getElementById("notaBene")
 
-let computerSelection,playerSelection,convertCase
-let roundTotal = 5
-let computerScore = 0
-let playerScore = 0
+    let computerSelection, playerSelection,computerImages,playerScore = 0, computerScore = 0
+    const list = ["roche", "papier", "ciseaux"]
 
-const list = ["Roche","Papier","Ciseaux"]
+    boutonDemarrer.addEventListener("click", startGame)
 
-function getComputerChoice(){
-    computerSelection = list[Math.floor(Math.random() * list.length)]
+    boutonRejouer.addEventListener("click", function () {
+        playerScore = 0
+        computerScore = 0
+        computerScoreDisplay.innerText = "0"
+        playerScoreDisplay.innerText = "0"
+        resultatSection.style.display = "none"
 
-    return computerSelection
-}
+        jeuSection.style.display = "block"
+    })
 
-convertCase = (selection) => selection.charAt(0).toUpperCase() + selection.slice(1).toLowerCase()
-
-
-function getPlayerChoice(){
-    playerSelection = convertCase(readline.question("Que choissisez vous? :"))
-
-    while (!list.includes(playerSelection)){
-        playerSelection = convertCase(readline.question("Choix invalide ! :"))
+    function startGame() {
+        playSound3()
+        boutonDemarrer.style.display = "none"
+        jeuSection.style.display = "block"
+        getPlayerChoice()
     }
 
-    return playerSelection
-}
+    function getPlayerChoice() {
+        playerInput.forEach(function (link) {
+            link.addEventListener("click", function (event) {
+                event.preventDefault()
+                playerInput.forEach(function (otherLink) {
+                    otherLink.style.border = "initial"
+                })
 
-function playRound(computerSelection, playerSelection) {
-    console.log(`\nOrdinateur : ${computerSelection}`)
-    console.log(`Joueur : ${playerSelection}`)
+                link.style.border = "4px solid green"
+                playerSelection = this.getAttribute("alt")
+                playSound1()
 
-    if (computerSelection === playerSelection) {
-        console.log(`${computerSelection} est egale a ${playerSelection}\nMatch nul.`)
-        computerScore++
-        playerScore++
-    } else if (
-        (computerSelection === "Ciseaux" && playerSelection === "Papier") ||
-        (computerSelection === "Papier" && playerSelection === "Roche") ||
-        (computerSelection === "Roche" && playerSelection === "Ciseaux")
-    ) {
-        console.log(`${computerSelection} bat ${playerSelection}\nVous avez perdu !`)
-        computerScore++
-    } else {
-        console.log(`${playerSelection} bat ${computerSelection}\nVous avez gagné !`)
-        playerScore++
+                //remove notabene
+                setTimeout(function(){
+                    notaBene.innerText = " "
+                },100)
+
+                setTimeout(function () {
+                    computerSelection = getComputerChoice()
+                    updateComputerChoiceBorder(computerSelection, playerSelection)
+                    playSound2()
+                    playRound(computerSelection, playerSelection)
+                }, 500)
+            })
+        })
     }
 
-    console.log(`Scores :\nJoueur: ${playerScore}, Ordinateur: ${computerScore}\n`)
-
-    return [computerSelection, playerSelection]
-}
-
-
-function game(){
-    console.log(`******Jeu Roche - Papier - Ciseaux******`)
-
-    for(let round = 1;round <= roundTotal;round++){
-        console.log(`***Round :${round}***`)
-
-        computerSelection = getComputerChoice()
-        playerSelection = getPlayerChoice()
-
-        playRound(computerSelection,playerSelection)
+    function getComputerChoice() {
+        return list[Math.floor(Math.random() * list.length)]
     }
 
-    // kiyes ki genyen
-    if (playerScore > computerScore) {
-        console.log("Vous avez gagné le jeu !")
-    } else if (playerScore < computerScore) {
-        console.log("L'ordinateur a gagné le jeu !")
-    } else {
-        console.log("Le jeu est un match nul !")
+    function updateComputerChoiceBorder(computerSelection, playerSelection) {
+        if (playerSelection) {
+            computerImages = document.querySelectorAll(".computerSelection .img img")
+            computerImages.forEach(function (image) {
+                image.style.border = "none"
+            })
+
+            const computerChoiceImage = document.querySelector(
+                `.computerSelection .img img[alt="${computerSelection}"]`
+            )
+            if (computerChoiceImage) {
+                computerChoiceImage.style.border = "4px solid yellow"
+            }
+        }
     }
-}
 
+    function playRound(computerSelection, playerSelection) {
+        if (computerSelection === playerSelection) {
+            showResult(`${computerSelection} est egale a ${playerSelection}\nMatch nul !`)
+        } else if (
+            (computerSelection === "ciseaux" && playerSelection === "papier") ||
+            (computerSelection === "papier" && playerSelection === "roche") ||
+            (computerSelection === "roche" && playerSelection === "ciseaux")
+        ) {
+            computerScore++;
+            showResult(`${computerSelection} bat ${playerSelection}\nVous avez perdu ce tour !`)
+        } else {
+            playerScore++
+            showResult(`${playerSelection} bat ${computerSelection}\nVous avez gagne ce tour !`)
+        }
 
-game()
+        computerScoreDisplay.innerText = computerScore
+        playerScoreDisplay.innerText = playerScore
+
+        if (playerScore === 5 || computerScore === 5) {
+            endGame()
+            showResult("")
+            playerInput.forEach(function (otherLink) {
+                otherLink.style.border = "initial"
+            })
+            computerImages.forEach(function (image) {
+                image.style.border = "initial"
+            })
+        }
+    }
+
+    function showResult(result) {
+        ecran.innerText = result
+        ecran.style.color = "white"
+        ecran.style.paddingTop = "15px"
+    }
+
+    function endGame() {
+        jeuSection.style.display = "none"
+        resultatSection.style.display = "block"
+        playSound3()
+        
+        resultatSection.lastChild.innerHTML = " "
+        const resultElement = document.createElement("h4")
+        if (playerScore > computerScore){
+            resultElement.innerText = "Vous avez gagné!🏆"
+            playSound4()
+        }else{
+            resultElement.innerText = "Vous avez perdu!🥺"
+            playSound5()
+        }
+        resultatSection.appendChild(resultElement)
+    }
+
+    function playSound1() {
+        playerSon.play()
+    }
+
+    function playSound2() {
+        computerSon.play()
+    }
+
+    function playSound3() {
+        startSon.play()
+    }
+
+    function playSound4() {
+        winnerSon.play()
+    }
+
+    function playSound5() {
+        loseSon.play()
+    }
+})
