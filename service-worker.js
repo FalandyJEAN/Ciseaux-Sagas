@@ -1,5 +1,6 @@
-const cacheName = 'ciseaux-saga-v1';
-const filesToCache = [
+// Service Worker
+const CACHE_NAME = 'my-cache-v1';
+const urlsToCache = [
   '/',
   '/index.html',
   '/CSS/style.css',
@@ -10,7 +11,7 @@ const filesToCache = [
   '/IMAGES/favicon-16x16.png',
   '/IMAGES/site.webmanifest',
   '/IMAGES/safari-pinned-tab.svg',
-  '/IMAGES/briquejpeg.jpeg',
+  '/manifest.json',
   '/IMAGES/computer-solid.svg',
   '/IMAGES/roches.jpeg',
   '/IMAGES/ciseaux.jpeg',
@@ -19,21 +20,23 @@ const filesToCache = [
   '/SONS/computerSound.wav',
   '/SONS/startSound.wav',
   '/SONS/winner.wav',
-  '/SONS/Sad-SoundBible.com-759843766.wav',
+  '/SONS/Sad-SoundBible.com-759843766.wav'
 ]
 
-self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(cacheName).then((cache) => {
-      return cache.addAll(filesToCache)
-    })
+self.addEventListener('install', function(event) {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(function(cache) {
+        return cache.addAll(urlsToCache)
+      })
   )
 })
 
-self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    caches.match(e.request).then((response) => {
-      return response || fetch(e.request)
-    })
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        return response || fetch(event.request)
+      })
   )
 })
