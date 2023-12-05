@@ -127,10 +127,10 @@ document.addEventListener("DOMContentLoaded", function () {
         resultatSection.lastChild.innerHTML = " "
         const resultElement = document.createElement("h4")
         if (playerScore > computerScore){
-            resultElement.innerText = "Vous avez gagné!🏆"
+            resultElement.innerText = `Vous avez gagné!\n🏆`
             playSound4()
         }else{
-            resultElement.innerText = "Vous avez perdu!🥺"
+            resultElement.innerText = `Vous avez perdu!\n🥺`
             playSound5()
         }
         resultatSection.appendChild(resultElement)
