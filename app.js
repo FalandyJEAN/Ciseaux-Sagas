@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function showResult(result) {
         ecran.innerText = result
-        ecran.style.color = "white"
+        ecran.style.color = "rgb(12,81,81)"
         ecran.style.paddingTop = "15px"
     }
 
