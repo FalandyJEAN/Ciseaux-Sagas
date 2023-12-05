@@ -21,7 +21,7 @@ body{
 }
 
 .container{
-    color: white;
+    color:rgb(12, 81, 81);/*white*/
     display: flex;
     text-align: center;
     align-items: center;
@@ -79,7 +79,7 @@ footer{
 }
 
 .resultat{
-    color:white;
+    color:rgb(12, 81, 81);/*white*/
 }
 
 .resultat h4{
