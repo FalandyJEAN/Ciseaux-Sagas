@@ -128,9 +128,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const resultElement = document.createElement("h4")
         if (playerScore > computerScore){
             resultElement.innerText = `Vous avez gagné!\n🏆`
+            resultElement.style.textAlign = "center"
             playSound4()
         }else{
             resultElement.innerText = `Vous avez perdu!\n🥺`
+            resultElement.style.textAlign = "center"
             playSound5()
         }
         resultatSection.appendChild(resultElement)
